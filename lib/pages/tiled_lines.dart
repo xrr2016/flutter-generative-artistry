@@ -22,33 +22,24 @@ class TiledLines extends StatelessWidget {
     }
 
     return Scaffold(
-      body: Container(
-        width: double.infinity,
-        child: Column(
-          mainAxisAlignment: MainAxisAlignment.center,
-          crossAxisAlignment: CrossAxisAlignment.center,
-          children: [
-            Container(
-              width: 320.0,
-              height: 320.0,
-              decoration: BoxDecoration(
-                border: Border.all(
-                  color: Colors.black,
-                  width: 20.0,
-                ),
-                boxShadow: shadows,
-              ),
-              child: Container(
-                color: Colors.white,
-                padding: const EdgeInsets.all(20.0),
-                child: CustomPaint(
-                  painter: TiledLinesPainter(20),
-                ),
-              ),
+      body: Center(
+        child: Container(
+          width: 320.0,
+          height: 320.0,
+          decoration: BoxDecoration(
+            border: Border.all(
+              color: Colors.black,
+              width: 20.0,
             ),
-            SizedBox(height: 40),
-            IconButton(icon: Icon(Icons.refresh), onPressed: () {}),
-          ],
+            boxShadow: shadows,
+          ),
+          child: Container(
+            color: Colors.white,
+            padding: const EdgeInsets.all(20.0),
+            child: CustomPaint(
+              painter: TiledLinesPainter(20),
+            ),
+          ),
         ),
       ),
     );
@@ -89,16 +80,12 @@ class TiledLinesPainter extends CustomPainter {
 
   @override
   void paint(Canvas canvas, Size size) {
-    for (double i = 0; i < size.width; i += step) {
-      for (double j = 0; j < size.height; j += step) {
-        _drawLine(canvas, i, j, step, step);
+    for (double x = 0; x < size.width; x += step) {
+      for (double y = 0; y < size.height; y += step) {
+        _drawLine(canvas, x, y, step, step);
       }
     }
   }
 
-  @override
   bool shouldRepaint(TiledLinesPainter oldDelegate) => false;
-
-  @override
-  bool shouldRebuildSemantics(TiledLinesPainter oldDelegate) => false;
 }
