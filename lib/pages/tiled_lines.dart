@@ -1,12 +1,7 @@
 import 'dart:math';
 import 'package:flutter/material.dart';
 
-class TiledLines extends StatefulWidget {
-  @override
-  _TiledLinesState createState() => _TiledLinesState();
-}
-
-class _TiledLinesState extends State<TiledLines> {
+class TiledLines extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     List<BoxShadow> shadows = [];
