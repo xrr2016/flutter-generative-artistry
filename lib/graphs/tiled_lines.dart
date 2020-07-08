@@ -4,44 +4,8 @@ import 'package:flutter/material.dart';
 class TiledLines extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
-    List<BoxShadow> shadows = [];
-    double opacity = 0.1;
-
-    for (double i = 1; i <= 16; i++) {
-      opacity -= 0.01;
-      opacity = opacity > 0.01 ? opacity : 0.01;
-
-      shadows.add(
-        BoxShadow(
-          offset: Offset(-i, i),
-          color: Color.fromRGBO(0, 0, 0, opacity),
-          blurRadius: 2,
-          spreadRadius: 1,
-        ),
-      );
-    }
-
-    return Scaffold(
-      body: Center(
-        child: Container(
-          width: 320.0,
-          height: 320.0,
-          decoration: BoxDecoration(
-            border: Border.all(
-              color: Colors.black,
-              width: 20.0,
-            ),
-            boxShadow: shadows,
-          ),
-          child: Container(
-            color: Colors.white,
-            padding: const EdgeInsets.all(20.0),
-            child: CustomPaint(
-              painter: TiledLinesPainter(20),
-            ),
-          ),
-        ),
-      ),
+    return CustomPaint(
+      painter: TiledLinesPainter(20),
     );
   }
 }

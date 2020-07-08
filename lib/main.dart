@@ -1,6 +1,6 @@
 import 'package:flutter/material.dart';
 
-import 'pages/tiled_lines.dart';
+import 'pages/tiled_lines_page.dart';
 
 void main() => runApp(MyApp());
 
@@ -10,7 +10,7 @@ class MyApp extends StatelessWidget {
     return MaterialApp(
       debugShowCheckedModeBanner: false,
       title: 'Material App',
-      home: TiledLines(),
+      home: TiledLinesPage(),
     );
   }
 }
