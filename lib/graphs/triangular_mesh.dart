@@ -1,6 +1,7 @@
 import 'dart:math';
 
 import 'package:flutter/material.dart';
+import 'package:flutter_generative_artistry/colors.dart';
 
 class Point {
   double x;
@@ -20,7 +21,8 @@ class TriangularMeshPainter extends CustomPainter {
   void _drawTriangle(Canvas canvas, Point pointA, Point pointB, Point pointC) {
     Path path = Path();
     Paint fill = Paint()
-      ..color = Colors.black.withOpacity(Random().nextDouble() * .9)
+      // ..color = Colors.black.withOpacity(Random().nextDouble() * .9)
+      ..color = colors[Random().nextInt(colors.length)].withOpacity(.8)
       ..style = PaintingStyle.fill
       ..strokeJoin = StrokeJoin.bevel
       ..isAntiAlias = true;
