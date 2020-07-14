@@ -54,13 +54,11 @@ class TriangularMeshPainter extends CustomPainter {
       line = [];
 
       for (double x = gap / 4; x <= size.width; x += gap) {
-        double random = (Random().nextDouble() * .8 - .4) * gap;
         Point point = Point();
+        double random = (Random().nextDouble() * .8 - .4) * gap;
         point.x = x + random + (odd ? gap / 2 : 0);
         point.y = y + (Random().nextDouble() * .8 - .4) * gap;
-
         line.add(point);
-        // canvas.drawCircle(Offset(point.x, point.y), 2, paint);
       }
 
       lines.add(line);
@@ -85,7 +83,4 @@ class TriangularMeshPainter extends CustomPainter {
 
   @override
   bool shouldRepaint(TriangularMeshPainter oldDelegate) => false;
-
-  @override
-  bool shouldRebuildSemantics(TriangularMeshPainter oldDelegate) => false;
 }
