@@ -1,6 +1,6 @@
 import 'package:flutter/material.dart';
 
-import 'pages/tiled_lines_page.dart';
+import 'pages/triangular_mesh_page.dart';
 
 void main() => runApp(MyApp());
 
@@ -10,7 +10,7 @@ class MyApp extends StatelessWidget {
     return MaterialApp(
       debugShowCheckedModeBanner: false,
       title: 'Material App',
-      home: TiledLinesPage(),
+      home: TriangularMeshPage(),
     );
   }
 }
