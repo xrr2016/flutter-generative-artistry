@@ -40,7 +40,6 @@ class _PaticlesPageState extends State<PaticlesPage>
     super.initState();
 
     controller = AnimationController(
-      vsync: this,
       duration: Duration(seconds: 10),
     )
       ..addListener(() {

@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:flutter_generative_artistry/pages/circle_packing_page.dart';
 import 'package:flutter_generative_artistry/pages/piet_mondrian_page.dart';
 
 import 'arts/particles_page.dart';
@@ -12,7 +13,7 @@ class MyApp extends StatelessWidget {
     return MaterialApp(
       debugShowCheckedModeBanner: false,
       title: 'Generative Artistry',
-      home: PaticlesPage(),
+      home: CirclePackingPage(),
     );
   }
 }
