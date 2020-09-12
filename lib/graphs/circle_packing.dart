@@ -36,10 +36,10 @@ class CirclePackingPainter extends CustomPainter {
       ..color = colors[Random().nextInt(colors.length)];
 
     circles.add(circle);
-    Paint paint = Paint()
-      ..color = circle.color
-      ..strokeWidth = 1
-      ..style = PaintingStyle.stroke;
+    // Paint paint = Paint()
+    //   ..color = circle.color
+    //   ..strokeWidth = 1
+    //   ..style = PaintingStyle.stroke;
 
     for (var i = minRaidus; i < maxRaidus; i++) {
       circle.radius = i;
@@ -49,7 +49,7 @@ class CirclePackingPainter extends CustomPainter {
       }
     }
 
-    canvas.drawCircle(circle.postion, circle.radius, paint);
+    // canvas.drawCircle(circle.postion, circle.radius, paint);
   }
 
   bool doesCircleHaveACollision(Circle circle) {

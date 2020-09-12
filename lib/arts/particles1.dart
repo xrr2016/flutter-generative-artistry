@@ -1,23 +1,16 @@
 import 'dart:math';
 
 import 'package:flutter/material.dart';
+import 'package:flutter_generative_artistry/models/particle.dart';
 
 import '../colors.dart';
 
-class Particle {
-  Offset position;
-  Color color;
-  double speed;
-  double theta;
-  double radius;
-}
-
-class PaticlesPage extends StatefulWidget {
+class Paticles1 extends StatefulWidget {
   @override
-  _PaticlesPageState createState() => _PaticlesPageState();
+  _Paticles1State createState() => _Paticles1State();
 }
 
-class _PaticlesPageState extends State<PaticlesPage>
+class _Paticles1State extends State<Paticles1>
     with SingleTickerProviderStateMixin {
   AnimationController controller;
 
@@ -40,6 +33,7 @@ class _PaticlesPageState extends State<PaticlesPage>
     super.initState();
 
     controller = AnimationController(
+      vsync: this,
       duration: Duration(seconds: 10),
     )
       ..addListener(() {
