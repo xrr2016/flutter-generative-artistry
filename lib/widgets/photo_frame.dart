@@ -27,16 +27,16 @@ class PhotoFrame extends StatelessWidget {
     return Container(
       width: 320.0,
       height: 320.0,
+      padding: const EdgeInsets.all(20.0),
       decoration: BoxDecoration(
-        border: Border.all(
-          color: Colors.black,
-          width: 20.0,
-        ),
+        color: Colors.white,
+        border: Border.all(color: Colors.black, width: 20.0),
         boxShadow: shadows,
       ),
+      clipBehavior: Clip.hardEdge,
       child: Container(
-        color: Colors.white,
-        padding: const EdgeInsets.all(20.0),
+        decoration: BoxDecoration(),
+        clipBehavior: Clip.antiAlias,
         child: child,
       ),
     );

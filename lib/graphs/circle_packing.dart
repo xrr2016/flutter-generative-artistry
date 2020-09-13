@@ -4,7 +4,7 @@ import 'package:flutter/material.dart';
 import 'package:flutter_generative_artistry/colors.dart';
 
 class Circle {
-  Offset postion;
+  Point center;
   double radius;
   Color color;
 }
@@ -24,55 +24,85 @@ class CirclePackingPainter extends CustomPainter {
   double maxRaidus = 100;
   int totalCircles = 500;
   int createCircleAttemps = 500;
+  Random random = Random();
 
-  void _createAndDrawCircle(Canvas canvas, Size size) {
-    Random random = Random();
-    Circle circle = Circle()
-      ..postion = Offset(
-        random.nextDouble() * size.width,
-        random.nextDouble() * size.height,
-      )
-      ..radius = minRaidus
-      ..color = colors[Random().nextInt(colors.length)];
+  void _createCircles(Canvas canvas, Size size) {
+    Circle circle;
+    bool circleSafeToDraw = false;
 
-    circles.add(circle);
-    // Paint paint = Paint()
-    //   ..color = circle.color
-    //   ..strokeWidth = 1
-    //   ..style = PaintingStyle.stroke;
+    for (var i = 0; i < createCircleAttemps; i++) {
+      circle = Circle()
+        ..radius = minRaidus
+        ..center = Point(
+          random.nextDouble() * size.width,
+          random.nextDouble() * size.height,
+        )
+        ..color = colors[Random().nextInt(colors.length)];
+
+      if (_doesHaveACollision(circle, size)) {
+        continue;
+      } else {
+        circleSafeToDraw = true;
+        break;
+      }
+    }
+
+    if (!circleSafeToDraw) {
+      return;
+    }
 
     for (var i = minRaidus; i < maxRaidus; i++) {
       circle.radius = i;
-      if (doesCircleHaveACollision(circle)) {
+      if (_doesHaveACollision(circle, size)) {
         circle.radius--;
         break;
       }
     }
 
-    // canvas.drawCircle(circle.postion, circle.radius, paint);
+    circles.add(circle);
   }
 
-  bool doesCircleHaveACollision(Circle circle) {
+  void _drawCircles(Canvas canvas) {
+    Paint paint = Paint()
+      ..strokeWidth = 0.0
+      ..isAntiAlias = true
+      ..style = PaintingStyle.stroke;
+
+    circles.asMap().forEach((key, circle) {
+      paint.color = Colors.black;
+      Offset offset = Offset(circle.center.x, circle.center.y);
+      canvas.drawCircle(offset, circle.radius, paint);
+    });
+  }
+
+  bool _doesHaveACollision(Circle circle, Size size) {
     for (var i = 0; i < circles.length; i++) {
       Circle otherCircle = circles[i];
       double r2 = circle.radius + otherCircle.radius;
-      double dx = circle.postion.dx - otherCircle.postion.dx;
-      double dy = circle.postion.dy - otherCircle.postion.dy;
 
-      print(r2);
-      print(sqrt(pow(dx, 2) + pow(dy, 2)));
-
-      if (r2 >= sqrt(pow(dx, 2) + pow(dy, 2))) {
+      if (r2 >= circle.center.distanceTo(otherCircle.center) - 1) {
         return true;
       }
     }
+
+    if (circle.center.x + circle.radius >= size.width ||
+        circle.center.x - circle.radius <= 0) {
+      return true;
+    }
+
+    if (circle.center.y + circle.radius >= size.height ||
+        circle.center.y - circle.radius <= 0) {
+      return true;
+    }
+
     return false;
   }
 
   @override
   void paint(Canvas canvas, Size size) {
     for (var i = 0; i < totalCircles; i++) {
-      _createAndDrawCircle(canvas, size);
+      _createCircles(canvas, size);
+      _drawCircles(canvas);
     }
   }
 

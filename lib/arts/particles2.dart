@@ -31,9 +31,9 @@ class _Paticles2State extends State<Paticles2>
   void createBlodField() {
     final Size size = MediaQuery.of(context).size;
     final Offset center = Offset(size.width / 2, size.height / 2);
-    final int numOfBlod = 5;
-    final double radius = size.width * .5 / numOfBlod;
-    final double alpha = 0.2;
+    final int numOfBlod = 6;
+    final double radius = size.width * 1.2 / numOfBlod;
+    final double alpha = 0.5;
 
     blobField(radius, numOfBlod, alpha, center);
   }
@@ -99,7 +99,7 @@ class _Paticles2State extends State<Paticles2>
       duration: Duration(seconds: 1),
     )..forward();
 
-    Tween(begin: 0, end: 10).animate(controller)
+    Tween(begin: 0, end: 5).animate(controller)
       ..addListener(() {
         if (particles.isEmpty) {
           createBlodField();
