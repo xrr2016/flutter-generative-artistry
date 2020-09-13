@@ -54,8 +54,8 @@ class JoyDivisionPainter extends CustomPainter {
         Point p2 = lines[i + 1][j + 1];
         Offset o2 = Offset(p2.x, p1.y);
 
-        print('p1: (${p1.x}, ${p1.y})');
-        print('p2: (${p2.x}, ${p2.y})');
+        // print('p1: (${p1.x}, ${p1.y})');
+        // print('p2: (${p2.x}, ${p2.y})');
 
         canvas.drawLine(o1, o2, paint);
       }

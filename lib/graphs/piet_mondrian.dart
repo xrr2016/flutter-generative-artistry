@@ -12,14 +12,8 @@ class PietMondrian extends StatefulWidget {
 class _PietMondrianState extends State<PietMondrian> {
   @override
   Widget build(BuildContext context) {
-    return Center(
-      child: Container(
-        width: 320,
-        height: 320,
-        child: CustomPaint(
-          painter: PietMondrianPainnter(),
-        ),
-      ),
+    return CustomPaint(
+      painter: PietMondrianPainnter(),
     );
   }
 }

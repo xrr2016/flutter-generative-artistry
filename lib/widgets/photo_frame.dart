@@ -2,8 +2,14 @@ import 'package:flutter/material.dart';
 
 class PhotoFrame extends StatelessWidget {
   final Widget child;
+  final double width;
+  final double height;
 
-  const PhotoFrame({this.child});
+  const PhotoFrame({
+    this.child,
+    this.width = 720.0,
+    this.height = 720.0,
+  });
 
   @override
   Widget build(BuildContext context) {
@@ -25,20 +31,15 @@ class PhotoFrame extends StatelessWidget {
     }
 
     return Container(
-      width: 320.0,
-      height: 320.0,
-      padding: const EdgeInsets.all(20.0),
+      width: width,
+      height: height,
+      padding: const EdgeInsets.all(40.0),
       decoration: BoxDecoration(
-        color: Colors.white,
-        border: Border.all(color: Colors.black, width: 20.0),
         boxShadow: shadows,
+        color: Colors.white,
+        border: Border.all(color: Colors.black, width: 24.0),
       ),
-      clipBehavior: Clip.hardEdge,
-      child: Container(
-        decoration: BoxDecoration(),
-        clipBehavior: Clip.antiAlias,
-        child: child,
-      ),
+      child: child,
     );
   }
 }
