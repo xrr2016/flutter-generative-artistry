@@ -64,7 +64,7 @@ class CirclePackingPainter extends CustomPainter {
 
   void _drawCircles(Canvas canvas) {
     Paint paint = Paint()
-      ..strokeWidth = 0.0
+      ..strokeWidth = 0.5
       ..isAntiAlias = true
       ..style = PaintingStyle.stroke;
 
