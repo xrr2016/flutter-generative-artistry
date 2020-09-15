@@ -62,7 +62,7 @@ class HypnoticSquaresPainter extends CustomPainter {
   @override
   void paint(Canvas canvas, Size size) {
     double canvasSize = size.width;
-    double tileStep = (canvasSize - offset * 2) / 7;
+    double tileStep = (canvasSize - offset * 2) / 6;
     double startSize = tileStep;
 
     for (var x = offset; x < canvasSize - offset; x += tileStep) {

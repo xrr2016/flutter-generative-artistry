@@ -45,8 +45,8 @@ class UnDeuxTroisPainter extends CustomPainter {
     double step = 30;
     double aThirdOfHeight = size.height / 3;
 
-    for (var y = 0.0; y < height - step; y += step) {
-      for (var x = 0.0; x < width - step; x += step) {
+    for (var y = step; y < height - step; y += step) {
+      for (var x = step; x < width - step; x += step) {
         if (y < aThirdOfHeight) {
           _draw(x, y, step, step, [0.5], canvas);
         } else if (y < aThirdOfHeight * 2) {

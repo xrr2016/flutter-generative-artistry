@@ -34,13 +34,13 @@ class JoyDivisionPainter extends CustomPainter {
     }
 
     Paint paint = Paint()
-      ..strokeWidth = 2
+      ..strokeWidth = 3
       ..color = Colors.black
       ..blendMode = BlendMode.dstOut
-      ..style = PaintingStyle.fill
+      ..style = PaintingStyle.stroke
       ..isAntiAlias = true;
 
-    for (var i = 2; i < lines.length; i++) {
+    for (var i = 5; i < lines.length; i++) {
       Point p1 = lines[i][0];
       Path path = Path()..moveTo(p1.x, p1.y);
 
@@ -52,11 +52,11 @@ class JoyDivisionPainter extends CustomPainter {
         path.quadraticBezierTo(p2.x, p2.y, xc, yc);
         canvas.drawPath(path, paint);
 
-        Path path2 = Path();
-        Point p3 = lines[i + 1][j + 1];
-        path.moveTo(p2.x, p2.y);
-        path2.quadraticBezierTo(p2.x, p2.y, p3.x, p3.y);
-        canvas.drawPath(path2, paint);
+        //   Path path2 = Path();
+        //   Point p3 = lines[i + 1][j + 1];
+        //   path.moveTo(p2.x, p2.y);
+        //   path2.quadraticBezierTo(p2.x, p2.y, p3.x, p3.y);
+        // canvas.drawPath(path2, paint);
       }
     }
   }
