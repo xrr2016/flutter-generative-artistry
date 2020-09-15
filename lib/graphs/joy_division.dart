@@ -3,13 +3,6 @@ import 'dart:ui';
 
 import 'package:flutter/material.dart';
 
-class Point {
-  final double x;
-  final double y;
-
-  Point({@required this.x, @required this.y});
-}
-
 class JoyDivision extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
@@ -23,17 +16,18 @@ class JoyDivisionPainter extends CustomPainter {
   @override
   void paint(Canvas canvas, Size size) {
     double width = size.width;
-    double height = size.height;
 
-    double step = 10;
+    double step = 20;
     List<List<Point>> lines = [];
 
     for (double i = step; i <= width - step; i += step) {
       List<Point> line = [];
+      for (double j = step; j <= width - step; j += step) {
+        double distanceToCenter = (j - width / 2).abs();
+        double variance = max(width / 2 - 50 - distanceToCenter, 0);
+        double random = Random().nextDouble() * variance / 2 * -1;
+        Point point = Point(j, i + random);
 
-      for (double j = step; j <= height - step; j += step) {
-        double random = Random().nextDouble() * 10;
-        Point point = Point(x: i, y: j + random);
         line.add(point);
       }
       lines.add(line);
@@ -42,22 +36,27 @@ class JoyDivisionPainter extends CustomPainter {
     Paint paint = Paint()
       ..strokeWidth = 2
       ..color = Colors.black
+      ..blendMode = BlendMode.dstOut
+      ..style = PaintingStyle.fill
       ..isAntiAlias = true;
 
-    for (int i = 0; i < lines.length - 1; i++) {
-      final List<Point> line = lines[i];
+    for (var i = 2; i < lines.length; i++) {
+      Point p1 = lines[i][0];
+      Path path = Path()..moveTo(p1.x, p1.y);
 
-      for (int j = 0; j < line.length - 1; j++) {
-        Point p1 = lines[i][j];
-        Offset o1 = Offset(p1.x, p1.y);
+      for (var j = 0; j < lines[i].length - 2; j++) {
+        double xc = (lines[i][j].x + lines[i][j + 1].x) / 2;
+        double yc = (lines[i][j].y + lines[i][j + 1].y) / 2;
 
-        Point p2 = lines[i + 1][j + 1];
-        Offset o2 = Offset(p2.x, p1.y);
+        Point p2 = lines[i][j];
+        path.quadraticBezierTo(p2.x, p2.y, xc, yc);
+        canvas.drawPath(path, paint);
 
-        // print('p1: (${p1.x}, ${p1.y})');
-        // print('p2: (${p2.x}, ${p2.y})');
-
-        canvas.drawLine(o1, o2, paint);
+        Path path2 = Path();
+        Point p3 = lines[i + 1][j + 1];
+        path.moveTo(p2.x, p2.y);
+        path2.quadraticBezierTo(p2.x, p2.y, p3.x, p3.y);
+        canvas.drawPath(path2, paint);
       }
     }
   }

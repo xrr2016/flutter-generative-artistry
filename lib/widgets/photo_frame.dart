@@ -39,7 +39,15 @@ class PhotoFrame extends StatelessWidget {
         color: Colors.white,
         border: Border.all(color: Colors.black, width: 24.0),
       ),
-      child: child,
+      child: Container(
+        decoration: BoxDecoration(
+          border: Border.all(
+            color: Colors.black12,
+            width: 1,
+          ),
+        ),
+        child: child,
+      ),
     );
   }
 }
