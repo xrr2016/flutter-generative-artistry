@@ -1,12 +1,10 @@
 import 'dart:math';
 
 import 'package:flutter/material.dart';
-import 'package:flutter_generative_artistry/colors.dart';
 
 class Circle {
   Point center;
   double radius;
-  Color color;
 }
 
 class CirclePacking extends StatelessWidget {
@@ -19,11 +17,17 @@ class CirclePacking extends StatelessWidget {
 }
 
 class CirclePackingPainter extends CustomPainter {
+  // 生成的圆形数组
   List<Circle> circles = [];
+  // 圆形的最小半径
   double minRaidus = 2;
+  // 圆形的最大半径
   double maxRaidus = 100;
+  // 圆形的总数
   int totalCircles = 500;
+  // 尝试绘制圆形的总数
   int createCircleAttemps = 500;
+  // 随机因子
   Random random = Random();
 
   void _createCircles(Canvas canvas, Size size) {
@@ -36,8 +40,7 @@ class CirclePackingPainter extends CustomPainter {
         ..center = Point(
           random.nextDouble() * size.width,
           random.nextDouble() * size.height,
-        )
-        ..color = colors[Random().nextInt(colors.length)];
+        );
 
       if (_doesHaveACollision(circle, size)) {
         continue;
@@ -108,7 +111,4 @@ class CirclePackingPainter extends CustomPainter {
 
   @override
   bool shouldRepaint(CirclePackingPainter oldDelegate) => true;
-
-  @override
-  bool shouldRebuildSemantics(CirclePackingPainter oldDelegate) => false;
 }

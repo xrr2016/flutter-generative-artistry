@@ -9,6 +9,8 @@ class CirclePackingPage extends StatelessWidget {
     return Scaffold(
       body: Center(
         child: PhotoFrame(
+          width: 320,
+          height: 320,
           child: CirclePacking(),
         ),
       ),

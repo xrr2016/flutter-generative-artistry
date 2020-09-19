@@ -14,7 +14,7 @@ class MyApp extends StatelessWidget {
     return MaterialApp(
       debugShowCheckedModeBanner: false,
       title: 'Generative Artistry',
-      home: PietMonDrianPage(),
+      home: CirclePackingPage(),
     );
   }
 }

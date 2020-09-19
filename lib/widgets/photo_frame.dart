@@ -4,11 +4,13 @@ class PhotoFrame extends StatelessWidget {
   final Widget child;
   final double width;
   final double height;
+  final double padding;
 
   const PhotoFrame({
     this.child,
     this.width = 720.0,
     this.height = 720.0,
+    this.padding = 20.0,
   });
 
   @override
@@ -33,21 +35,13 @@ class PhotoFrame extends StatelessWidget {
     return Container(
       width: width,
       height: height,
-      padding: const EdgeInsets.all(40.0),
+      padding: EdgeInsets.all(padding),
       decoration: BoxDecoration(
         boxShadow: shadows,
         color: Colors.white,
         border: Border.all(color: Colors.black, width: 24.0),
       ),
-      child: Container(
-        decoration: BoxDecoration(
-          border: Border.all(
-            color: Colors.black12,
-            width: 1,
-          ),
-        ),
-        child: child,
-      ),
+      child: child,
     );
   }
 }
