@@ -42,7 +42,9 @@ class CirclePackingPainter extends CustomPainter {
           random.nextDouble() * size.height,
         );
 
-      if (_doesHaveACollision(circle, size)) {
+      // 如果碰撞检测失败跳过这个圆形，进行下一次尝试
+      // 否则跳出循环将这个圆形加入 circles 数组
+      if (_doesHaveCollision(circle, size)) {
         continue;
       } else {
         circleSafeToDraw = true;
@@ -54,15 +56,42 @@ class CirclePackingPainter extends CustomPainter {
       return;
     }
 
+    // 不断增大圆形的半径
     for (var i = minRaidus; i < maxRaidus; i++) {
       circle.radius = i;
-      if (_doesHaveACollision(circle, size)) {
+      if (_doesHaveCollision(circle, size)) {
         circle.radius--;
         break;
       }
     }
 
     circles.add(circle);
+  }
+
+  bool _doesHaveCollision(Circle circle, Size size) {
+    // 这里对传入的圆形与其他绘制圆形的检测
+    for (var i = 0; i < circles.length; i++) {
+      Circle otherCircle = circles[i];
+      double r2 = circle.radius + otherCircle.radius;
+
+      // 判断两个圆形圆心的距离是否小于两圆形的半径和
+      if (r2 >= circle.center.distanceTo(otherCircle.center) - 1) {
+        return true;
+      }
+    }
+
+    // 这里判断圆形是否超过左右边界
+    if (circle.center.x + circle.radius >= size.width ||
+        circle.center.x - circle.radius <= 0) {
+      return true;
+    }
+    // 这里判断圆形是否超过上下边界
+    if (circle.center.y + circle.radius >= size.height ||
+        circle.center.y - circle.radius <= 0) {
+      return true;
+    }
+
+    return false;
   }
 
   void _drawCircles(Canvas canvas) {
@@ -76,29 +105,6 @@ class CirclePackingPainter extends CustomPainter {
       Offset offset = Offset(circle.center.x, circle.center.y);
       canvas.drawCircle(offset, circle.radius, paint);
     });
-  }
-
-  bool _doesHaveACollision(Circle circle, Size size) {
-    for (var i = 0; i < circles.length; i++) {
-      Circle otherCircle = circles[i];
-      double r2 = circle.radius + otherCircle.radius;
-
-      if (r2 >= circle.center.distanceTo(otherCircle.center) - 1) {
-        return true;
-      }
-    }
-
-    if (circle.center.x + circle.radius >= size.width ||
-        circle.center.x - circle.radius <= 0) {
-      return true;
-    }
-
-    if (circle.center.y + circle.radius >= size.height ||
-        circle.center.y - circle.radius <= 0) {
-      return true;
-    }
-
-    return false;
   }
 
   @override
